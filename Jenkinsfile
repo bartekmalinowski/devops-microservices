@@ -1,15 +1,19 @@
-@Library('my-shared-library') _  // Lib from github
+@Library('my-shared-library') _ 
 
 pipeline {
     agent any
 
     stages {
-        stage('Test Shared Library') {
+        stage('App Build') {
             steps {
                 script {
-                    // Function in Groovy
-                    dockerBuild("test-app")
+                    dockerBuild("my-mikroservice")
                 }
+            }
+        }
+        stage('Image Test') {
+            steps {
+                sh "docker run --rm my-mikroservice:latest"
             }
         }
     }
