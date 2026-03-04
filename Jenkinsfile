@@ -4,7 +4,7 @@ pipeline {
     agent any
 
         environment {
-        AWS_ACCOUNT_ID = "4668-2517-0375" 
+        AWS_ACCOUNT_ID = "466825170375" // For future use secret key in Jenkins 
         REGION         = "eu-central-1"
         APP_NAME       = "moj-mikroserwis"
     }
