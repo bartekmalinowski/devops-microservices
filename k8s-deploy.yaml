@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: moj-mikroserwis
+spec:
+  replicas: 2 # 2 copies of the application for high availability
+  selector:
+    matchLabels:
+      app: moj-mikroserwis
+  template:
+    metadata:
+      labels:
+        app: moj-mikroserwis
+    spec:
+      containers:
+      - name: app
+        image: IMAGE_URL # It will replace Jenkins during deployment
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: moj-mikroserwis-service
+spec:
+  type: NodePort # Easiest way to expose the service outside the cluster
+  selector:
+    app: moj-mikroserwis
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30001 # Aplikacja will be open on port 30001

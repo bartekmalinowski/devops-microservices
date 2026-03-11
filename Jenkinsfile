@@ -30,5 +30,11 @@ pipeline {
                 }
             }
         }
+        stage('Deploy to K8s') {
+            steps {
+                String fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${APP_NAME}:latest"
+                    k8sDeploy(fullImageName, "k3s-config")
+                }
+            }
+        }
     }
-}
