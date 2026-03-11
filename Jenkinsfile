@@ -19,7 +19,13 @@ pipeline {
         }
         stage('Image Test') {
             steps {
-                sh "docker run --rm ${APP_NAME}:latest"
+                sh "docker run -d --name test-app -p 8081:80 ${APP_NAME}:latest"
+
+                sh "sleep 5"
+
+                sh "curl -f http://localhost:8081"
+
+                sh "docker stop test-app && docker rm test-app"
             }
         }
         stage('Push to AWS ECR') {
