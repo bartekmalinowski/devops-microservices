@@ -17,6 +17,8 @@ spec:
         image: IMAGE_URL # It will replace Jenkins during deployment
         ports:
         - containerPort: 80
+      imagePullSecrets:
+        - name: ecr-creds      
 
 ---
 apiVersion: v1
