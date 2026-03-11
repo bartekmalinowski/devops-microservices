@@ -42,7 +42,7 @@ pipeline {
             steps {
                 script {
                     String fullImageName = "${AWS_ACCOUNT_ID}.dkr.ecr.${REGION}.amazonaws.com/${APP_NAME}:latest"
-                    k8sDeploy(fullImageName, "k3s-config")
+                    k8sDeploy(fullImageName, "k3s-config", AWS_ACCOUNT_ID, REGION) 
                 }
             }
         }
